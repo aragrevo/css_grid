@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Layout</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            margin-top: 28px;
+            /* Mio */
+        }
+
+        .post-list {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(100px, 293px));
+            justify-content: center;
+            grid-gap: 28px;
+        }
+
+        .post {
+            cursor: pointer;
+            position: relative;
+            display: block;
+        }
+
+        .post-image {
+            margin: 0;
+        }
+
+        .post-image img {
+            width: 100%;
+            vertical-align: top;
+            height: 300px;
+            /* Mio */
+            object-fit: cover;
+            /* Mio */
+        }
+
+        .post-overlay {
+            background: rgba(0, 0, 0, .4);
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .post:hover .post-overlay {
+            display: flex;
+        }
+
+        .post-likes,
+        .post-comments {
+            width: 80px;
+            margin: 5px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                margin-top: 3px;
+                /* Mio */
+            }
+
+            .post-list {
+                grid-gap: 3px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="post-list" id="app">
+    </section>
+    <script>
+        const app = document.getElementById('app');
+        let elements = '';
+        const limit = Math.random() * 20;
+        console.log(limit);
+
+        for (let index = 0; index < limit; index++) {
+            const element = postTemplate();
+            elements += element;
+        }
+        app.innerHTML = elements;
+
+        function postTemplate() {
+            return `
+            <a href="#" class="post">
+            <figure class="post-image">
+                <img src="img/${random()}.jpg" alt="" srcset=" ">
+            </figure>
+            <div class="post-overlay">
+                <p>
+                    <span class="post-likes"><i class="fas fa-heart"></i> 150</span>
+                    <span class="post-comments"><i class="fas fa-comment"></i> 10</span>
+                </p>
+            </div>
+        </a>
+            `;
+        }
+
+        function random() {
+            return Math.floor(Math.random() * (6 - 1) + 1);
+        }
+    </script>
+</body>
+
+</html>
